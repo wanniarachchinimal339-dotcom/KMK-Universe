@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMK UNIVERSE — Your Digital Movie Universe</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loader" class="loader-overlay">
+        <div class="spinner"></div>
+        <h2 class="glow-text">KMK UNIVERSE</h2>
+    </div>
+
+    <!-- Sticky Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="brand-logo">KMK <span>UNIVERSE</span></a>
+            <button class="hamburger-btn" id="hamburger" aria-label="Toggle Navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav class="nav-links" id="navMenu">
+                <a href="#hero" class="active">Home</a>
+                <a href="#explore">Movies</a>
+                <a href="#upload">Upload</a>
+                <a href="#admin">Admin</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Shell -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 class="glitch-title">KMK UNIVERSE</h1>
+                <p class="subtitle">Your Digital Movie Universe</p>
+                <p class="description">Discover, Upload & Manage Your Cinematic Collection with Next-Gen Fluid Controls.</p>
+                <div class="hero-actions">
+                    <a href="#explore" class="btn btn-primary">Explore Movies</a>
+                    <a href="#upload" class="btn btn-secondary">Upload Movie</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Filter Controls -->
+        <section id="explore" class="section-container">
+            <div class="section-header">
+                <h2>Explore <span class="highlight">Catalog</span></h2>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search by title, genre, year...">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="categories-bar" id="categoryContainer">
+                <button class="cat-btn active" data-category="All">All</button>
+                <button class="cat-btn" data-category="Action">Action</button>
+                <button class="cat-btn" data-category="Comedy">Comedy</button>
+                <button class="cat-btn" data-category="Drama">Drama</button>
+                <button class="cat-btn" data-category="Horror">Horror</button>
+                <button class="cat-btn" data-category="Sci-Fi">Sci-Fi</button>
+                <button class="cat-btn" data-category="Thriller">Thriller</button>
+                <button class="cat-btn" data-category="Romance">Romance</button>
+                <button class="cat-btn" data-category="Animation">Animation</button>
+            </div>
+
+            <!-- Movies Grid -->
+            <div class="movie-grid" id="movieGrid">
+                <!-- Dynamically Populated via JS -->
+            </div>
+        </section>
+
+        <!-- Movie Upload Section -->
+        <section id="upload" class="section-container">
+            <div class="glass-card form-card">
+                <h2>Upload <span class="highlight">Your Movie</span></h2>
+                <form id="uploadForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="title">Movie Title *</label>
+                            <input type="text" id="title" required placeholder="e.g. Cyberpunk 2077: Edgerunners">
+                        </div>
+                        <div class="form-group">
+                            <label for="year">Release Year *</label>
+                            <input type="number" id="year" required min="1900" max="2099" placeholder="2026">
+                        </div>
+                        <div class="form-group">
+                            <label for="genre">Genre *</label>
+                            <select id="genre" required>
+                                <option value="Action">Action</option>
+                                <option value="Comedy">Comedy</option>
+                                <option value="Drama">Drama</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Sci-Fi">Sci-Fi</option>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Animation">Animation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="duration">Duration (mins) *</label>
+                            <input type="text" id="duration" required placeholder="124 min">
+                        </div>
+                        <div class="form-group">
+                            <label for="rating">Rating (0-10) *</label>
+                            <input type="number" id="rating" step="0.1" min="0" max="10" required placeholder="8.8">
+                        </div>
+                        <div class="form-group">
+                            <label for="language">Language *</label>
+                            <input type="text" id="language" required placeholder="English">
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="description">Movie Description *</label>
+                        <textarea id="description" rows="4" required placeholder="Enter cinematic summary..."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="trailerUrl">Trailer URL (YouTube/Embed)</label>
+                        <input type="url" id="trailerUrl" placeholder="https://www.youtube.com/embed/...">
+                    </div>
+
+                    <!-- File Inputs -->
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Poster Image *</label>
+                            <div class="file-dropzone" id="posterDropzone">
+                                <input type="file" id="posterInput" accept="image/*" required>
+                                <div class="dropzone-text" id="posterText">Drag & Drop Poster or Click</div>
+                                <div class="preview-box hidden" id="posterPreviewBox">
+                                    <img id="posterPreview" src="" alt="Poster Preview">
+                                    <span class="file-name" id="posterFileName"></span>
+                                    <button type="button" class="btn-remove" id="removePoster">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Video File (MP4/WebM)</label>
+                            <div class="file-dropzone" id="videoDropzone">
+                                <input type="file" id="videoInput" accept="video/*">
+                                <div class="dropzone-text" id="videoText">Drag & Drop Video or Click</div>
+                                <div class="preview-box hidden" id="videoPreviewBox">
+                                    <span class="file-name" id="videoFileName"></span>
+                                    <span class="file-duration" id="videoDuration"></span>
+                                    <button type="button" class="btn-remove" id="removeVideo">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Animation -->
+                    <div class="progress-bar-container hidden" id="uploadProgressContainer">
+                        <div class="progress-bar" id="uploadProgressBar"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Upload Movie</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Admin Management Dashboard -->
+        <section id="admin" class="section-container">
+            <div class="section-header">
+                <h2>Admin <span class="highlight">Dashboard</span></h2>
+            </div>
+            
+            <!-- Dashboard Stat Counters -->
+            <div class="stats-grid">
+                <div class="glass-card stat-card">
+                    <h3>Total Movies</h3>
+                    <p class="counter" id="statTotalMovies">0</p>
+                </div>
+                <div class="glass-card stat-card">
+                    <h3>Categories</h3>
+                    <p class="counter" id="statCategories">8</p>
+                </div>
+                <div class="glass-card stat-card">
+                    <h3>Storage Status</h3>
+                    <p class="counter-text">Browser localStorage (Demo Engine)</p>
+                </div>
+            </div>
+
+            <!-- Management Table -->
+            <div class="glass-card table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Poster</th>
+                            <th>Title</th>
+                            <th>Genre</th>
+                            <th>Year</th>
+                            <th>Rating</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        <!-- Dynamic Rows Insertion -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section-container">
+            <div class="glass-card about-card">
+                <h2>About <span class="highlight">KMK UNIVERSE</span></h2>
+                <p>KMK Universe is a modern digital movie platform created by a web developer to showcase movies, video content and modern web technology.</p>
+                
+                <div class="developer-info">
+                    <p><strong>Developer:</strong> KMK Universe</p>
+                    <p><strong>Role:</strong> Lead Web Developer</p>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://github.com" target="_blank" class="social-icon">GitHub</a>
+                    <a href="https://youtube.com" target="_blank" class="social-icon">YouTube</a>
+                    <a href="https://facebook.com" target="_blank" class="social-icon">Facebook</a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon">Instagram</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section-container">
+            <div class="glass-card form-card">
+                <h2>Get in <span class="highlight">Touch</span></h2>
+                <form id="contactForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="contactName">Name *</label>
+                            <input type="text" id="contactName" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email *</label>
+                            <input type="email" id="contactEmail" required placeholder="john@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="contactSubject">Subject *</label>
+                        <input type="text" id="contactSubject" required placeholder="Inquiry about platform">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="contactMessage">Message *</label>
+                        <textarea id="contactMessage" rows="4" required placeholder="Write your message..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Movie Details & Video Modal -->
+    <div id="movieModal" class="modal-overlay hidden">
+        <div class="modal-content glass-card">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamically Populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top hidden">↑</button>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>KMK UNIVERSE</h3>
+                <p>Your Digital Movie Universe</p>
+            </div>
+            <div class="footer-links">
+                <a href="#hero">Home</a>
+                <a href="#explore">Movies</a>
+                <a href="#upload">Upload</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 KMK Universe. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS Execution Cascade -->
+    <script src="js/main.js"></script>
+    <script src="js/movies.js"></script>
+    <script src="js/upload.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
